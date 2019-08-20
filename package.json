@@ -8,7 +8,8 @@
     "client": "cd client && npm run start",
     "start": "node server.js",
     "start-dev":"nodemon server.js",
-    "dev": "npm-run-all -p start-dev client"
+    "dev": "npm-run-all -p start-dev client",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",
