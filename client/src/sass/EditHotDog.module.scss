@@ -1,0 +1,20 @@
+@import './utils//mixins.scss';
+@import './CreateHotDog.module.scss';
+#createHotDog{
+    .ingredient{
+        display: grid;
+        grid-auto-flow: column;
+        grid-template: 1fr/7fr 4fr 1fr;
+        grid-gap :.5em;
+        margin-bottom: 0.5em;
+    }
+    .delete{
+        margin: 0;
+        background-color: $red;
+        &:hover{@include highlight($red)}
+    }
+    button.clearBtn{
+        font-size: 1em;
+        width: 100%;
+    }
+}

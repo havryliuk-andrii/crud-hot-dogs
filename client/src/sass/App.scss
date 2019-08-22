@@ -1,0 +1,20 @@
+@import "utils/vars";
+@import "utils/mixins";
+@import "utils/common";
+
+#app{
+    height: 100vh;
+    background: $lite;
+    color: $dark;
+    display: grid;
+    grid-template-rows: $headerHeight auto 4em;
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-areas: 
+        "h h h" 
+        "m m sb" 
+        "f f f";
+    header{grid-area: h}
+    main{grid-area: m}
+    footer{grid-area: f}
+    #sideBar{grid-area: sb}
+}

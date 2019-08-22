@@ -1,0 +1,14 @@
+section{
+    height: 100%;
+}
+
+#emptyListScreen{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    #emptyListString{
+        font-size: 2em;
+        font-weight: bold;
+    }
+}

@@ -1,0 +1,73 @@
+@import './utils/mixins.scss';
+
+#createHotDog{
+    height: 100%;
+    display: grid;
+    grid-template-areas: 
+        "h"
+        "fw";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    h1{
+        grid-area: h;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        font-weight: 700;
+    }
+}
+
+.formWrapper{
+    grid-area: fw;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    form{
+        background-color: darken($lite,3);
+        width: 30em;
+        padding: 2em 3em;
+        display: grid;
+        gap:2em;
+        @include fly(darken($lite,20));
+        input{
+            width: 100%;
+        }
+
+        .ingredient{
+            display: grid;
+            grid-auto-flow: column;
+            grid-template: 1fr/7fr 3fr;
+            gap :1em;
+            margin-bottom: 0.5em;
+        }
+        button{
+            width: min-content;
+            margin-left: 1em;
+            padding: .3em 1em;
+            background-color: lighten($dark,6);
+            color:$lite;
+            cursor: pointer;
+            border-radius: 5px;
+            &:hover{@include highlight(lighten($dark,6));}
+        }
+
+        .formControls{
+            display: grid;
+            justify-content: flex-end;
+            gap :1em;
+            grid-auto-flow: column;
+            padding: 1em 0 0;
+            border-top: 1px solid $dark;
+            button.clearBtn{
+                background-color: $red;
+                &:hover{@include highlight($red);}
+            }
+
+            button.createBtn{
+                background-color: $green;
+                &:hover{@include highlight($green);}
+            }
+        }
+    }
+}

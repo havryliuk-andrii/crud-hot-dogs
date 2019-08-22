@@ -1,0 +1,22 @@
+@import './mixins.scss';
+
+*{
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+    display: inline-block;
+    color: $action;
+    @include text-link;
+}
+input{
+  border:1px solid $dark ; 
+  padding: 0.2em 0;
+  padding-left: 1.2em; 
+  outline: none;
+}
+button{
+    outline: none;
+    border: none;
+}

@@ -1,0 +1,12 @@
+@import "utils/mixins";
+
+header{
+    display: flex;
+    align-items: center;
+    line-height: $headerHeight/2.5;
+    padding: 0 8vw;
+    font-size: 2.5em;
+    background-color: $dark;
+    color: $lite;
+    @include neon;
+}

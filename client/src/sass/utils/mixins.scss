@@ -1,0 +1,39 @@
+@import "vars";
+
+
+@mixin neon($color:$lite,$width:6px){
+    text-shadow: 0 0 $width $color;
+}
+
+@mixin text-link{
+    text-decoration: none;
+    &::after{
+        display: block;
+        content:"";
+        height: 1px;
+        width: 0;
+        transition: all .4s;
+        background: $action;
+    }
+    &:hover::after{
+        width: 100%;
+    }
+}
+@mixin remove-text-link{
+    text-decoration: none;
+    &::after{
+        display: none;
+    }
+}
+
+@mixin fly( $x:2, $y:2, $width:6, $color:$dark ){
+    box-shadow: $x+px $y+px $width+px $color;
+}
+
+@mixin fly($color:$dark ){
+    box-shadow: 3px 3px 8px $color;
+}
+
+@mixin highlight($bgc){
+    background-color: lighten($bgc,10);
+}

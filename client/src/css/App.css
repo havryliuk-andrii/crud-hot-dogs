@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box; }
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  color: #88D498;
+  text-decoration: none; }
+  a::after {
+    display: block;
+    content: "";
+    height: 1px;
+    width: 0;
+    transition: all .4s;
+    background: #88D498; }
+  a:hover::after {
+    width: 100%; }
+
+input {
+  border: 1px solid #011936;
+  padding: 0.2em 0;
+  padding-left: 1.2em;
+  outline: none; }
+
+button {
+  outline: none;
+  border: none; }
+
+#app {
+  height: 100vh;
+  background: #f8f8f8;
+  color: #011936;
+  display: grid;
+  grid-template-rows: 5em auto 4em;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: "h h h"  "m m sb"  "f f f"; }
+  #app header {
+    grid-area: h; }
+  #app main {
+    grid-area: m; }
+  #app footer {
+    grid-area: f; }
+  #app #sideBar {
+    grid-area: sb; }

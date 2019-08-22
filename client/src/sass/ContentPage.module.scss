@@ -1,0 +1,12 @@
+@import './utils/vars.scss';
+
+main{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    &::-webkit-scrollbar{
+        width: 1em;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: lighten($action,10s);
+    }
+}

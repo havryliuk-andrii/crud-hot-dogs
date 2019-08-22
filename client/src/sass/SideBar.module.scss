@@ -1,0 +1,53 @@
+@import './utils/mixins';//also vars
+
+#sideBarWr{padding: 5vh 0;}
+
+#sideBar{
+    height: 100%;
+    padding: 0 0;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    gap:4vw;
+    border-left: 1px solid $dark;
+
+    button{
+        height: 14vh;
+        width: 20vw;
+        cursor: pointer;
+        color: $lite;
+        font-size: 1.9em;
+        text-transform: uppercase;
+        border-radius: 10px;
+        transition: transform .5s;
+        @include fly(lighten(#000,35));
+        &:hover{
+            transform: translateX(10px);
+        }
+    }
+
+    a{
+        @include remove-text-link();
+    }
+} 
+
+#create{
+    $bgc:$green;
+    background-color: $bgc; 
+    &:hover{@include highlight($bgc)}
+} 
+#read{
+    $bgc:$blue;
+    background-color: $bgc; 
+    &:hover{@include highlight($bgc)}
+}
+#update{
+    $bgc:$yellow;
+    background-color: $bgc; 
+    &:hover{@include highlight($bgc)}
+}
+#delete{
+    $bgc:$red;
+    background-color: $bgc;
+    &:hover{@include highlight($bgc)}
+}

@@ -1,0 +1,73 @@
+#createHotDog {
+  height: 100%;
+  display: grid;
+  grid-template-areas: "h" "fw";
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr; }
+  #createHotDog h1 {
+    grid-area: h;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700; }
+
+.formWrapper {
+  grid-area: fw;
+  display: grid;
+  justify-content: center;
+  align-items: center; }
+  .formWrapper form {
+    background-color: #f0f0f0;
+    width: 30em;
+    padding: 2em 3em;
+    display: grid;
+    gap: 2em;
+    box-shadow: 3px 3px 8px #c5c5c5; }
+    .formWrapper form input {
+      width: 100%; }
+    .formWrapper form .ingredient {
+      display: grid;
+      grid-auto-flow: column;
+      grid-template: 1fr/7fr 3fr;
+      gap: 1em;
+      margin-bottom: 0.5em; }
+    .formWrapper form button {
+      width: min-content;
+      margin-left: 1em;
+      padding: .3em 1em;
+      background-color: #022754;
+      color: #f8f8f8;
+      cursor: pointer;
+      border-radius: 5px; }
+      .formWrapper form button:hover {
+        background-color: #023e86; }
+    .formWrapper form .formControls {
+      display: grid;
+      justify-content: flex-end;
+      gap: 1em;
+      grid-auto-flow: column;
+      padding: 1em 0 0;
+      border-top: 1px solid #011936; }
+      .formWrapper form .formControls button.clearBtn {
+        background-color: #A80202; }
+        .formWrapper form .formControls button.clearBtn:hover {
+          background-color: #da0303; }
+      .formWrapper form .formControls button.createBtn {
+        background-color: #00A832; }
+        .formWrapper form .formControls button.createBtn:hover {
+          background-color: #00db41; }
+
+#createHotDog .ingredient {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template: 1fr/7fr 4fr 1fr;
+  grid-gap: .5em;
+  margin-bottom: 0.5em; }
+#createHotDog .delete {
+  margin: 0;
+  background-color: #A80202; }
+  #createHotDog .delete:hover {
+    background-color: #da0303; }
+#createHotDog button.clearBtn {
+  font-size: 1em;
+  width: 100%; }

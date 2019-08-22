@@ -1,0 +1,20 @@
+@import "utils/mixins.scss";
+
+footer{
+    padding: 0 8vw;
+    display: grid;
+    grid-template: 1fr /auto 1fr;
+    align-items: center;
+    font-size: 1.6em;
+    color: $lite;
+    background-color: $dark;
+}
+
+#siteCopyright {}
+
+#authorInfo {
+  display: grid;
+  justify-content: space-around;
+  grid-auto-flow: column;
+}
+span{@include neon}

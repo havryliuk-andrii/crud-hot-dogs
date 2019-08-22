@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box; }
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  color: #88D498;
+  text-decoration: none; }
+  a::after {
+    display: block;
+    content: "";
+    height: 1px;
+    width: 0;
+    transition: all .4s;
+    background: #88D498; }
+  a:hover::after {
+    width: 100%; }
+
+input {
+  border: 1px solid #011936;
+  padding: 0.2em 0;
+  padding-left: 1.2em;
+  outline: none; }
+
+button {
+  outline: none;
+  border: none; }
+
+/*# sourceMappingURL=common.css.map */
