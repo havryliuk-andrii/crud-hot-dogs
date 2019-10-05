@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACI,kBAAK;EACD,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,MAAM;EACvB,WAAW,EAAE,MAAM",
+"sources": ["../sass/EditSuccess.module.scss"],
+"names": [],
+"file": "EditSuccess.module.css"
+}

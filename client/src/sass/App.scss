@@ -8,7 +8,7 @@
     color: $dark;
     display: grid;
     grid-template-rows: $headerHeight auto 4em;
-    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-columns: 2fr 1fr 1fr; 
     grid-template-areas: 
         "h h h" 
         "m m sb" 

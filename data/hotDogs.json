@@ -1,88 +1,107 @@
 [
-    {
-      "name": "French-Double",
-      "description": "doubleFrench tot dog",
-      "ingredients": [
-        {
-          "name": "bread",
-          "mass": "50",
-          "id": 0
-        },
-        {
-          "name": "tomato",
-          "mass": "10",
-          "id": 1
-        },
-        {
-          "name": "frog's legs",
-          "mass": "30",
-          "id": 2
-        }
-      ],
-      "mass": 90,
-      "cost": 180,
-      "id": 4
-    },
-    {
-      "name": "French hot dog",
-      "description": "a French hot dog",
-      "ingredients": [
-        {
-          "name": "bread",
-          "mass": "30",
-          "id": 0
-        },
-        {
-          "name": "sousage",
-          "mass": "10",
-          "id": 1
-        },
-        {
-          "name": "tomato",
-          "mass": "5",
-          "id": 2
-        },
-        {
-          "name": "frog's legs",
-          "mass": "10",
-          "id": 3
-        }
-      ],
-      "mass": 55,
-      "cost": 110,
-      "id": 3
-    },
-    {
-      "name": "classic+ hot dog",
-      "description": "a classic+ hot dog",
-      "ingredients": [
-        {
-          "name": "bread",
-          "mass": "20",
-          "id": 0
-        },
-        {
-          "name": "sousage",
-          "mass": "10",
-          "id": 1
-        }
-      ],
-      "mass": 30,
-      "cost": 60,
-      "id": 1
-    },
-    {
-      "name": "classic hot dog",
-      "description": "a classic hot dog",
-      "ingredients": [
-        {
-          "name": "bread",
-          "mass": "10",
-          "id": 0
-        }
-      ],
-      "mass": "10",
-      "cost": 20,
-      "id": 0
-    }
-  ]
+  {
+    "name": "__TEST__UI__",
+    "description": "__test__ui__",
+    "ingredients": [
+      {
+        "name": "ing1",
+        "mass": "2",
+        "id": 0
+      },
+      {
+        "name": "1wef",
+        "mass": "2",
+        "id": 1
+      },
+      {
+        "name": "sousage",
+        "mass": "32",
+        "id": 2
+      }
+    ],
+    "mass": 36,
+    "cost": 72,
+    "id": 15
+  },
+  {
+    "name": "French-Double",
+    "description": "doubleFrench tot dog",
+    "ingredients": [
+      {
+        "name": "bread",
+        "mass": "50",
+        "id": 0
+      },
+      {
+        "name": "frog's legs",
+        "mass": "30",
+        "id": 1
+      }
+    ],
+    "mass": 80,
+    "cost": 160,
+    "id": 4
+  },
+  {
+    "name": "French hot dog",
+    "description": "a French hot dog",
+    "ingredients": [
+      {
+        "name": "bread",
+        "mass": "30",
+        "id": 0
+      },
+      {
+        "name": "sousage",
+        "mass": "10",
+        "id": 1
+      },
+      {
+        "name": "tomato",
+        "mass": "8",
+        "id": 2
+      },
+      {
+        "name": "frog's legs",
+        "mass": "10",
+        "id": 3
+      }
+    ],
+    "mass": 58,
+    "cost": 116,
+    "id": 3
+  },
+  {
+    "name": "classic+ hot dog",
+    "description": "a classic+ hot dog",
+    "ingredients": [
+      {
+        "name": "bread",
+        "mass": "20",
+        "id": 0
+      },
+      {
+        "name": "sousage",
+        "mass": "10",
+        "id": 1
+      }
+    ],
+    "mass": 30,
+    "cost": 60,
+    "id": 1
+  },
+  {
+    "name": "classic hot dog",
+    "description": "a classic hot dog",
+    "ingredients": [
+      {
+        "name": "bread",
+        "mass": "10",
+        "id": 0
+      }
+    ],
+    "mass": "10",
+    "cost": 20,
+    "id": 0
+  }
+]

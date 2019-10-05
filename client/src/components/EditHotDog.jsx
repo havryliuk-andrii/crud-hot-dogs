@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useReducer } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { simpleField } from '../forms/Fields'
 
@@ -10,44 +10,94 @@ import { required, maxLength, number, string, minValue } from '../forms/validati
 const maxLength20 = maxLength(20);
 const minValue1 = minValue(1);
 
+const Ingredients = ({ings}) => {
+    console.log("---Ingredients---")
+    const delFunc = (id) =>{
+        if(state.count==1){
+            dispatch({type:"DISABLE_BTN"});
+        }
+        dispatch({type:"DELETE_INGREDIENT",payload:{
+                id:id
+            }
+        });
+    }
+    const initState = { 
+        count: ings.length,
+        ingredients:ings,
+        isBtnDisable:false
+    };
+    const reducer = (state, action) => {
+        switch (action.type) {
+            case 'inc':
+                return {...state, count:state.count+1};
+            case 'dec':
+                return {...state, count:state.count-1};
+            case 'DISABLE_BTN':
+                return {...state, isBtnDisable:true};
+            case 'DELETE_INGREDIENT':
+                return {...state, count:--state.count, ingredients:[...state.ingredients.filter(i=>i.id!=action.payload.id)]};
+            default:
+                throw new Error();
+        }
+    }
+    const [state,dispatch] = useReducer(reducer,initState);
+    
+    
+    return (
+        ings.map(i=>{
+            return <Ingredient key={i.id} id={i.id} isBtnDisable={state.isBtnDisable} delFunc={delFunc}/>
+        })
+    );
+}
+
+const Ingredient = ({id,btnDisable,delFunc}) => {
+    return (
+    <div className={s.ingredient} key={id}>
+        <Field className={s.ingredientName}
+            name={`in${id}`}
+            component={simpleField}
+            type='text'
+            placeholder="input ingredient"
+            validate={[required, maxLength20, string]}
+        />
+
+        <Field className={s.ingredientMass}
+            name={`im${id}`}
+            component={simpleField}
+            type='number'
+            placeholder="mass"
+            validate={[required, number, minValue1]}
+        />
+
+        {!btnDisable&&<button className={s.delete} type="button" onClick={()=>delFunc(id)}>Delete</button>}
+
+    </div>)
+}
+
 let HotDogEditForm = (props) => {
-    const ingredient = (id) => (
-        <div className={s.ingredient}>
-
-            <Field className={s.ingredientName}
-                name={`in${id}`}
-                component={simpleField}
-                type='text'
-                placeholder="input ingredient"
-                validate={[required, maxLength20, string]}
-            />
-
-            <Field className={s.ingredientMass}
-                name={`im${id}`}
-                component={simpleField}
-                type='number'
-                placeholder="mass"
-                validate={[required, number, minValue1]}
-            />
-
-            {/* <button className={s.delete} type="button" onClick={}>Delete</button> */}
-
-        </div>
-    )
-    const initIngredients = props.ingredients.map((i) => ingredient(i.id))
-    const initIngredientsId = Math.max(props.ingredients.map((i) => i.id));
+    console.log("---HotDogEditForm---")
+    const [removedIds,removeId] = useState([]);
+    
+    const ingsIds = props.ingredients.map((i) => i.id); 
+    const initIngredientsId = Math.max(...ingsIds);
     let [ingredientId, setIngredientId] = useState(initIngredientsId);
-    let [ingredients, setIngredients] = useState(initIngredients);
-
+        
     const formSubmit = (values) => {
+        removedIds.forEach(id=>{
+            delete values[`im${id}`];
+            delete values[`in${id}`];
+        })
         editHotDog(values,props.hotDogId);
     }
 
-
+    const addIngredient = ()=>{
+        setIngredientId(++ingredientId);
+        // setIngredients([...ingredients,ingredient(ingredientId)]);
+        // dispatch({type:"inc"})
+    };
 
     return (
         <form id={s.hotDogCreateForm} onSubmit={props.handleSubmit(formSubmit)}>
-
             <Field name='hotDogName'
                 component={simpleField}
                 type='text'
@@ -63,11 +113,9 @@ let HotDogEditForm = (props) => {
                 validate={[required, maxLength20, string]}
             />
 
-            <div className={s.ingredients}>
-                {ingredients}
-            </div>
+            <Ingredients ings={props.ingredients} />
 
-            {/* <button onClick={addIngredient} type="button" id={s.add}>Add</button> */}
+            <button onClick={addIngredient} type="button" id={s.add}>Add</button>
 
             <div className={s.formControls}>
                 <button className={s.clearBtn} type="button" disabled={props.pristine || props.submitting} onClick={props.reset}>Remove Changes</button>
