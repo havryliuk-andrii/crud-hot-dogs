@@ -11,10 +11,42 @@ const maxLength20 = maxLength(20);
 const minValue1 = minValue(1);
 
 let HotDogEditForm = (props) => {
-    const ingredient = (id) => (
-        <div className={s.ingredient}>
+    // const Ingredient = ({id}) => {
+    //     return <div className={s.ingredient}>
 
-            <Field className={s.ingredientName}
+    //         <Field className={s.ingredientName}
+    //             name={`in${id}`}
+    //             component={simpleField}
+    //             type='text'
+    //             placeholder="input ingredient"
+    //             validate={[required, maxLength20, string]}
+    //         />
+
+    //         <Field className={s.ingredientMass}
+    //             name={`im${id}`}
+    //             component={simpleField}
+    //             type='number'
+    //             placeholder="mass"
+    //             validate={[required, number, minValue1]}
+    //         />
+
+    //         {/* <button className={s.delete} type="button" onClick={}>Delete</button> */}
+
+    //     </div>
+    // }
+    // const initIngredients = props.ingredients.map((i) => <Ingredient id={i.id} />)
+    // const initIngredientsId = Math.max(props.ingredients.map((i) => i.id));
+    // let [ingredientId, setIngredientId] = useState(initIngredientsId);
+    // let [ingredients, setIngredients] = useState(initIngredients);
+
+    // const formSubmit = (values) => {
+    //     editHotDog(values,props.hotDogId);
+    // }
+
+    const Ingredient =({id})=>{
+        return <div className={s.ingredient}>
+
+           <Field className={s.ingredientName}
                 name={`in${id}`}
                 component={simpleField}
                 type='text'
@@ -30,23 +62,18 @@ let HotDogEditForm = (props) => {
                 validate={[required, number, minValue1]}
             />
 
-            {/* <button className={s.delete} type="button" onClick={}>Delete</button> */}
+            <button className={s.delete} type="button" >Delete</button>
 
         </div>
-    )
-    const initIngredients = props.ingredients.map((i) => ingredient(i.id))
-    const initIngredientsId = Math.max(props.ingredients.map((i) => i.id));
-    let [ingredientId, setIngredientId] = useState(initIngredientsId);
-    let [ingredients, setIngredients] = useState(initIngredients);
-
-    const formSubmit = (values) => {
-        editHotDog(values,props.hotDogId);
     }
 
-
+    const initIngredients = props.ingredients;
+    const ingredientsList = initIngredients.map(ingr =>(
+        <Ingredient id={ingr.id} key={ingr.id} />
+    ))
 
     return (
-        <form id={s.hotDogCreateForm} onSubmit={props.handleSubmit(formSubmit)}>
+        <form id={s.hotDogCreateForm} onSubmit={props.handleSubmit}>
 
             <Field name='hotDogName'
                 component={simpleField}
@@ -64,10 +91,10 @@ let HotDogEditForm = (props) => {
             />
 
             <div className={s.ingredients}>
-                {ingredients}
+                {ingredientsList}
             </div>
 
-            {/* <button onClick={addIngredient} type="button" id={s.add}>Add</button> */}
+            <button type="button" id={s.add}>Add</button>
 
             <div className={s.formControls}>
                 <button className={s.clearBtn} type="button" disabled={props.pristine || props.submitting} onClick={props.reset}>Remove Changes</button>
