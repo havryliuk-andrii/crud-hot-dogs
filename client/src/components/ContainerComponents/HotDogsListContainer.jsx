@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 import HotDogsList from '../HotDogsList'
 import withPreloader from '../../HOCs/WithPreloader';
-import { getHotDogs, deleteHotDog, editHotDog } from '../../redux/api';
+import { getHotDogs, deleteHotDog } from '../../redux/api';
 // import { setHotDogs } from '../../redux/redusers/hotDogsListPage';
 // import { getHotDogs } from '../../DAL/API';
 
@@ -18,7 +18,6 @@ const HotDogsListContainer = (props) =>{
     }
 
     const editHandler=(id)=>{
-        // editHotDog(id);
     }
 
     const mstp =(state)=>({

@@ -10,7 +10,7 @@ const SideBar = (props) => {
         <section id={s.sideBarWr}>
             <div id={s.sideBar}>
                 <NavLink to='/create'>
-                    <button onClick={props.createHandle} id={s.create}>Create new hot dog</button>
+                    <button  id={s.create}>Create new hot dog</button>
                 </NavLink>
                 <NavLink to='/'>
                     <button onClick={props.readHandle} id={s.read}>show hot dogs</button>

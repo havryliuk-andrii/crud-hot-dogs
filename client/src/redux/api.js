@@ -14,14 +14,14 @@ const addHotDog=async(values)=>{
     const hotDog = vals2JSON(values)
     store.dispatch(changeFetching(true));
     store.dispatch(createSuccess(true));
-    const postRes = await dal.addHotDog(hotDog);
+    await dal.addHotDog(hotDog);
     getHotDogs();
     store.dispatch(createSuccess(false));
 }
 
 const deleteHotDog = async(id)=>{
     store.dispatch(changeFetching(true));
-    const postRes = await dal.deleteHotDog(id);
+    await dal.deleteHotDog(id);
     getHotDogs();
 }
 
@@ -29,7 +29,7 @@ const editHotDog = async(values,id)=>{
     let editedHotDog = vals2JSON(values,id)
     store.dispatch(changeFetching(true));
     store.dispatch(editSuccess(true));
-    const postRes = await dal.editHotDog(editedHotDog,id);
+    await dal.editHotDog(editedHotDog,id);
     getHotDogs();
     store.dispatch(editSuccess(false));
 }
@@ -38,8 +38,8 @@ const vals2JSON = (values,id)=>{
     let hotDog = {};
     hotDog.name = values.hotDogName;
     hotDog.description = values.description;
-    const iNames=Object.keys(values).filter(key=>key.substring(2,0)=="in");
-    const iMasses=Object.keys(values).filter(key=>key.substring(2,0)=="im");
+    const iNames=Object.keys(values).filter(key=>key.substring(2,0)==="in");
+    const iMasses=Object.keys(values).filter(key=>key.substring(2,0)==="im");
     const counter =iNames.length;
     let tempIngredients=[];
     for(let i=0;i<counter;i++){
@@ -52,12 +52,5 @@ const vals2JSON = (values,id)=>{
     if(id)hotDog.id=id;
     return hotDog;
 }
-// const getHotDog=(id)=>{
-//     // return id?id>0?store.getState().HotDogsListPage.hotDogs.filter(hotDog=>hotDog.id===id)[0]:{}:{};
-//     const hotDogs = store.getState().HotDogsListPage.hotDogs;
-//     const hotDog = hotDogs?store.getState().HotDogsListPage.hotDogs.filter(hotDog=>hotDog.id==id)[0]:null;
-//     console.log(hotDog); 
-//     return hotDog;
-// }
 
 export {getHotDogs,addHotDog,deleteHotDog,editHotDog};

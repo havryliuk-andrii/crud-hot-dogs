@@ -1,18 +1,14 @@
-import React,{useEffect,useState} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect,withRouter} from 'react-router-dom'
-import HotDogsList from '../HotDogsList'
-import withPreloader from '../../HOCs/WithPreloader';
-import { getHotDog } from '../../redux/api';
 import EditHotDog from '../EditHotDog';
-import { compose } from 'redux';
+
 import { editSuccess } from '../../redux/redusers/EditHotDogReducer';
-// import { getHotDogs } from '../../DAL/API';
 
 
 const EditDogsListContainer = (props) =>{
     const mstp=(state)=>({
-        hotDog:state.HotDogsListPage.hotDogs?state.HotDogsListPage.hotDogs.filter(hotDog=>hotDog.id==props.match.params.id)[0]:null,
+        hotDog:state.HotDogsListPage.hotDogs?state.HotDogsListPage.hotDogs.filter(hotDog=>+hotDog.id===+props.match.params.id)[0]:null,
         isEditedSuccess:state.EditHotDogReducer.isEditedSuccess
     })
 

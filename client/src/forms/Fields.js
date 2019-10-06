@@ -2,7 +2,7 @@ import React from 'react'
 import s from '../css/Field.module.css'
 
 const simpleField =(props)=>{
-    const { input, className, placeholder, type, meta: { touched, error, warning } } = props;
+    const { input, className, placeholder, type, meta: { touched, error} } = props;
 
     return (
         <div className={`${s.inputWrapper}${className?" "+className:''}`}>

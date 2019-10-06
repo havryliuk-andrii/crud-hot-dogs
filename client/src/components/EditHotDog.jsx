@@ -10,7 +10,7 @@ import { required, maxLength, number, string, minValue } from '../forms/validati
 const maxLength20 = maxLength(20);
 const minValue1 = minValue(1);
 
-const Ingredient =({id,deleteIngredient})=>{
+const Ingredient =({id,deleteIngredient,disabled})=>{
     return <div className={s.ingredient}>
 
        <Field className={s.ingredientName}
@@ -29,13 +29,13 @@ const Ingredient =({id,deleteIngredient})=>{
             validate={[required, number, minValue1]}
         />
 
-        <button onClick={()=>deleteIngredient(id)} className={s.delete} type="button" >Delete</button>
+        {!disabled&&<button onClick={()=>deleteIngredient(id)} className={s.delete} type="button" >Delete</button>}
 
     </div>
 }
 const IngredientsList =(props)=>{     
     const ingredientsListUI = props.ingredients.map(ingr =>(
-        <Ingredient id={ingr.id} key={ingr.id} deleteIngredient={props.deleteIngredient}/>
+        <Ingredient id={ingr.id} key={ingr.id} deleteIngredient={props.deleteIngredient} disabled={props.disabled}/>
     ))
     return (
             <div className={s.ingredients}>
@@ -58,16 +58,17 @@ let HotDogEditForm = (props) => {
     
     const [ingredientsList, setIngredientsList] = useState(props.ingredients)
     const [removedIds,setRemovedIds] = useState([]);
-
+    const [disabled,setDisabled] = useState(props.ingredients.length===1);
     const deleteIngredient=(id)=>{
         let _ings = [...ingredientsList];
-        _ings=_ings.filter(ing=>ing.id!=id);
+        _ings=_ings.filter(ing=>ing.id!==id);
         setIngredientsList(_ings);
         
         let _remIds = [...removedIds];
         _remIds.push(id);
-        console.log(_remIds);
         setRemovedIds(_remIds);
+
+        if(_ings.length===1)setDisabled(true);
     }
 
     const AddNewIngredient =()=>{
@@ -75,8 +76,8 @@ let HotDogEditForm = (props) => {
         _ings.push({id:maxId+1,mass:0,name:""});
         setIngredientsList(_ings);
         setMaxId(max=>max+1);
+        setDisabled(false);
     }
-
     return (
         <form id={s.hotDogCreateForm} onSubmit={props.handleSubmit(formSubmit)}>
 
@@ -96,7 +97,9 @@ let HotDogEditForm = (props) => {
             />
 
             
-            <IngredientsList ingredients = {ingredientsList} deleteIngredient ={deleteIngredient}/>
+            <IngredientsList ingredients = {ingredientsList} 
+                deleteIngredient ={deleteIngredient}
+                disabled = {disabled}/>
             
             <button onClick={AddNewIngredient} type="button" id={s.add}>Add</button>
 
