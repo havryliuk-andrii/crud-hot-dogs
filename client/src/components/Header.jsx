@@ -1,13 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Field, reduxForm } from 'redux-form'
-import TooltipInput from '../shared/forms/TooltipInput';
 import '../css/Header.module.css'
-import {colors,lightenDarken} from '../shared/styles/styled';
-
+import search from '../assets/search.png';
 
 const Filter = styled.form`
 height:100%;
+display:grid;
+align-items:center;
+position: relative;
 padding: 1% 0 1% 0;
 margin-left:4em;
 `;
@@ -48,7 +49,7 @@ return(
 
 
 const _Filter = (props)=>{
-    const { handleSubmit, pristine, reset, submitting } = props;
+    const { handleSubmit, submitting } = props;
     const submitFilter = () =>{
         //api get filtered hotdogs
     }
@@ -62,9 +63,24 @@ const _Filter = (props)=>{
                 validate={null}
                 warn={null}
             />
+            <SearchBtn />
         </Filter>
     )
 }
+const SearchBtn = styled.button`
+background-color:none;
+outline:none;
+border:none;
+    /* background-image:${'url('+search+')'}; */
+    background-repeat:no-repeat;
+    background-size:contain;
+    position: absolute;
+    left:100%;
+    bottom:27%;
+    height:46%;
+    padding-left:.6rem;
+    cursor: pointer;
+`
 const FilterForm = reduxForm({form: 'FilterForm'})(_Filter);
 const Header = (props) =>{
     return (

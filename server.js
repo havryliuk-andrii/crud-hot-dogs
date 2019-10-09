@@ -19,7 +19,9 @@ app.use(bodyParser.json());
 
 app.get('/api/getHotDogs', (req,res) =>{
     const hotDogsData =fs.readFileSync('./data/hotDogs.json');
-    res.json(JSON.parse(hotDogsData));
+    const allHotDogs = JSON.parse(hotDogsData);
+    
+    res.json(allHotDogs);
 });
 
 app.post('/api/addHotDog', (req,res) =>{

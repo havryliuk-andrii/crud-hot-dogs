@@ -1,5 +1,3 @@
-import styled from 'styled-components';
-
 const colors = {
     bg : "#011936"
 }
@@ -16,7 +14,7 @@ const lightenDarken=(col, amt)=> {
   
     var usePound = false;
   
-    if (col[0] == "#") {
+    if (col[0] === "#") {
         col = col.slice(1);
         usePound = true;
     }
