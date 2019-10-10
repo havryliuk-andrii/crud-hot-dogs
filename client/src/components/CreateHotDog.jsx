@@ -12,7 +12,7 @@ const minValue1= minValue(1);
 let HotDogCreateForm=(props)=>{
 
     const ingredient=(id)=>(
-        <div className={s.ingredient}>
+        <div key ={id} className={s.ingredient}>
 
             <Field className={s.ingredientName} 
                    name={`in${id}`} 

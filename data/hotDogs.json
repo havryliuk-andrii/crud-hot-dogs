@@ -1,24 +1,5 @@
 [
   {
-    "name": "__TEST__UI__",
-    "description": "_kgr*))",
-    "ingredients": [
-      {
-        "name": "ing5",
-        "mass": "4",
-        "id": 0
-      },
-      {
-        "name": "ing4",
-        "mass": "5",
-        "id": 1
-      }
-    ],
-    "mass": 9,
-    "cost": 18,
-    "id": 14
-  },
-  {
     "name": "French-Double",
     "description": "doubleFrench tot dog",
     "ingredients": [
