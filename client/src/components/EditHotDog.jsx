@@ -55,7 +55,7 @@ let HotDogEditForm = (props) => {
     }
     
     let [maxId,setMaxId] = useState(Math.max(...props.ingredients.map(i=>i.id)));
-    const [disableDelBtn, setDisableDelBtn] = useState(false);
+    const [disableDelBtn, setDisableDelBtn] = useState(props.ingredients.length<2);
     const [ingredientsList, setIngredientsList] = useState(props.ingredients)
     const [removedIds,setRemovedIds] = useState([]);
 
@@ -103,7 +103,7 @@ let HotDogEditForm = (props) => {
             <button onClick={AddNewIngredient} type="button" id={s.add}>Add</button>
 
             <div className={s.formControls}>
-                <button className={s.clearBtn} type="button" disabled={props.pristine || props.submitting} onClick={props.reset}>Remove Changes</button>
+                {/* <button className={s.clearBtn} type="button" disabled={props.pristine || props.submitting} onClick={props.reset}>Remove Changes</button> */}
                 <button className={s.createBtn} type="submit" disabled={props.submitting}>Save</button>
             </div>
 
