@@ -9,18 +9,13 @@
         "id": 0
       },
       {
-        "name": "tomato",
-        "mass": "10",
+        "name": "del0",
+        "mass": "33",
         "id": 1
-      },
-      {
-        "name": "frog's legs",
-        "mass": "30",
-        "id": 2
       }
     ],
-    "mass": 90,
-    "cost": 180,
+    "mass": 83,
+    "cost": 166,
     "id": 4
   },
   {
