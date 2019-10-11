@@ -4,18 +4,13 @@
     "description": "doubleFrench tot dog",
     "ingredients": [
       {
-        "name": "bread",
-        "mass": "50",
-        "id": 0
-      },
-      {
         "name": "del0",
         "mass": "33",
-        "id": 1
+        "id": 0
       }
     ],
-    "mass": 83,
-    "cost": 166,
+    "mass": "33",
+    "cost": 66,
     "id": 4
   },
   {
