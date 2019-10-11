@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEA,MAAM;EACF,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,IAAI;EACb,aAAa,EAAE,aAAa;EAC5B,WAAW,EAAE,MAAM;EACnB,SAAS,EAAE,KAAK;EAChB,KAAK,ECLH,OAAO;EDMT,gBAAgB,ECLd,OAAO;;ADUb,WAAY;EACV,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,YAAY;EAC7B,cAAc,EAAE,MAAM;;AAExB,IAAI;EEfA,WAAW,EAAE,eAAiB",
+"sources": ["../sass/Footer.module.scss","../sass/utils/vars.scss","../sass/utils/mixins.scss"],
+"names": [],
+"file": "Footer.module.css"
+}

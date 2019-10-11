@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useReducer } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { simpleField } from '../forms/Fields'
 
@@ -82,7 +82,6 @@ let HotDogEditForm = (props) => {
 
     return (
         <form id={s.hotDogCreateForm} onSubmit={props.handleSubmit(formSubmit)}>
-
             <Field name='hotDogName'
                 component={simpleField}
                 type='text'

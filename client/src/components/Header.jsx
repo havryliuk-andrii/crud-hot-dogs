@@ -8,7 +8,7 @@ const Header = (props) =>{
     return (
         <header>
             <div id="logo">
-                CRUD-HOT-DOGS
+                Hot Dogs Manager
             </div>
         </header>
     )
