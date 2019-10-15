@@ -13,7 +13,10 @@ const getHotDogs=async()=>{
     store.dispatch(setHotDogs(hotDogs));
 }
 
-const setFiltration=(filter)=>{store.dispatch(setFilter(filter))};
+const setFiltration=(filter)=>{
+    store.dispatch(changeFetching(true));
+    store.dispatch(setFilter(filter))
+};
 
 const resetFiltration=()=>{store.dispatch(resetFilter())};
 

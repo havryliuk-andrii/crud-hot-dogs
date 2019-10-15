@@ -4,23 +4,23 @@
     "description": "doubleFrench tot dog",
     "ingredients": [
       {
-        "name": "bread",
-        "mass": "50",
+        "name": "frog's legs",
+        "mass": "30",
         "id": 0
       },
       {
-        "name": "tomato",
-        "mass": "10",
+        "name": "bread",
+        "mass": "30",
         "id": 1
       },
       {
-        "name": "frog's legs",
-        "mass": "30",
+        "name": "souse",
+        "mass": "15",
         "id": 2
       }
     ],
-    "mass": 90,
-    "cost": 180,
+    "mass": 75,
+    "cost": 150,
     "id": 4
   },
   {

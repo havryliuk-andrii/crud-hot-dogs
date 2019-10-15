@@ -5,7 +5,7 @@ import '../css/Header.module.css'
 import search from '../assets/search.png';
 import {NavLink} from 'react-router-dom'
 import {setFiltration} from '../redux/api'
-
+import {alphaNumeric} from '../shared/forms/validation'
 
 const Filter = styled.form`
 height:100%;
@@ -25,6 +25,14 @@ height:100%;
 const ToolTiped = styled.div`
 height:100%;
 display:grid;
+
+.tooltip{
+    position: absolute;
+    left: 120%;
+    top:0;
+    font-size:.6rem;
+    white-space: nowrap;
+}
 `
 const pureField = ({
 input,
@@ -62,7 +70,7 @@ const _Filter = (props)=>{
                 type="text"
                 component={pureField}
                 placeholder="Filter"
-                validate={null}
+                validate={alphaNumeric}
                 warn={null}
             />
             <NavLink to="/"><SearchBtn onClick={()=>handleSubmit(submitFilter)()}/></NavLink>
