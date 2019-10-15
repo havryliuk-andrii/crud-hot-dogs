@@ -4,6 +4,7 @@ import SideBar from '../SideBar';
 import {compose} from 'redux';
 import { connect } from 'react-redux';
 import {changeFetching} from '../../redux/redusers/hotDogsListPage';
+import { resetFiltration } from '../../redux/api';
 
 
 const SideBarContainer = (props) =>{
@@ -12,6 +13,7 @@ const SideBarContainer = (props) =>{
     
         const readHandle=()=>{
             props.changeFetching(true);
+            resetFiltration();
         };
     
         return <SideBar 

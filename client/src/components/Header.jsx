@@ -3,10 +3,12 @@ import styled from 'styled-components'
 import { Field, reduxForm } from 'redux-form'
 import '../css/Header.module.css'
 import search from '../assets/search.png';
+import {NavLink} from 'react-router-dom'
+import {setFiltration} from '../redux/api'
+
 
 const Filter = styled.form`
 height:100%;
-display:grid;
 align-items:center;
 position: relative;
 padding: 1% 0 1% 0;
@@ -50,8 +52,8 @@ return(
 
 const _Filter = (props)=>{
     const { handleSubmit, submitting } = props;
-    const submitFilter = () =>{
-        //api get filtered hotdogs
+    const submitFilter = (values) =>{
+        setFiltration(values.filter);
     }
     return (
         <Filter onSubmit={handleSubmit(submitFilter)}>
@@ -63,7 +65,7 @@ const _Filter = (props)=>{
                 validate={null}
                 warn={null}
             />
-            <SearchBtn />
+            <NavLink to="/"><SearchBtn onClick={()=>handleSubmit(submitFilter)()}/></NavLink>
         </Filter>
     )
 }
@@ -71,15 +73,22 @@ const SearchBtn = styled.button`
 background-color:none;
 outline:none;
 border:none;
-    /* background-image:${'url('+search+')'}; */
+    background-image:${'url('+search+')'};
     background-repeat:no-repeat;
+    background-color:transparent;
     background-size:contain;
+    background-position:center;
     position: absolute;
-    left:100%;
-    bottom:27%;
-    height:46%;
+    left:105%;
+    bottom:10%;
+    height:80%;
     padding-left:.6rem;
     cursor: pointer;
+    transition: all .3s;
+
+    &:hover{
+        transform: scale(1.3);
+    }
 `
 const FilterForm = reduxForm({form: 'FilterForm'})(_Filter);
 const Header = (props) =>{

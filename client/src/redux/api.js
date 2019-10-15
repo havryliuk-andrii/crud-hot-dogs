@@ -3,12 +3,19 @@ import dal from '../DAL/dal';
 import { setHotDogs,changeFetching } from './redusers/hotDogsListPage';
 import { editSuccess } from './redusers/EditHotDogReducer';
 import { createSuccess } from './redusers/CreateHotDogReducer';
+import { setFilter,resetFilter } from './redusers/Filter';
 
 const getHotDogs=async()=>{
     store.dispatch(changeFetching(true));
+    const filter = store.getState().Filter.filter;
+    console.log(filter);
     const hotDogs = await dal.getHotDogs().then(res=>res.data);
     store.dispatch(setHotDogs(hotDogs));
 }
+
+const setFiltration=(filter)=>{store.dispatch(setFilter(filter))};
+
+const resetFiltration=()=>{store.dispatch(resetFilter())};
 
 const addHotDog=async(values)=>{
     const hotDog = vals2JSON(values)
@@ -53,4 +60,4 @@ const vals2JSON = (values,id)=>{
     return hotDog;
 }
 
-export {getHotDogs,addHotDog,deleteHotDog,editHotDog};
+export {getHotDogs,addHotDog,deleteHotDog,editHotDog,setFiltration,resetFiltration};

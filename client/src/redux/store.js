@@ -5,11 +5,12 @@ import HotDogsListPage from './redusers/hotDogsListPage';
 import SideBar from './redusers/SideBarReduser';
 import EditHotDogReducer from './redusers/EditHotDogReducer';
 import CreateHotDogReducer from './redusers/CreateHotDogReducer';
-
+import Filter from './redusers/Filter';
 
 const redusers = combineReducers({
     HotDogsListPage,
     SideBar,
+    Filter,
     EditHotDogReducer,
     CreateHotDogReducer,
     form: formReducer

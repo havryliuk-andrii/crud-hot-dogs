@@ -20,7 +20,6 @@ app.use(bodyParser.json());
 app.get('/api/getHotDogs', (req,res) =>{
     const hotDogsData =fs.readFileSync('./data/hotDogs.json');
     const allHotDogs = JSON.parse(hotDogsData);
-    
     res.json(allHotDogs);
 });
 
