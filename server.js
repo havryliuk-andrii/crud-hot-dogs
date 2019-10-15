@@ -19,7 +19,12 @@ app.use(bodyParser.json());
 
 app.get('/api/getHotDogs', (req,res) =>{
     const hotDogsData =fs.readFileSync('./data/hotDogs.json');
-    const allHotDogs = JSON.parse(hotDogsData);
+    let allHotDogs = JSON.parse(hotDogsData);
+    const filter = req.query.filter;
+    console.log(filter);
+    if(filter!=="null"&&filter!=="undefined"){
+        allHotDogs = allHotDogs.filter(hotDog=>hotDog.name.includes(filter));
+    }
     res.json(allHotDogs);
 });
 

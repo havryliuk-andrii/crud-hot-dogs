@@ -3,8 +3,8 @@ import * as Axios from "axios";
 //to get json arr of hotDogs 
 const dal ={
 
-    getHotDogs:()=>{
-        return Axios.get('/api/getHotDogs');
+    getHotDogs:(filter)=>{
+        return Axios.get(`/api/getHotDogs?filter=${filter}`);
     },
 
     addHotDog:(hotDog)=>{
