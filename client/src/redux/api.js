@@ -8,7 +8,6 @@ import { setFilter,resetFilter } from './redusers/Filter';
 const getHotDogs=async()=>{
     store.dispatch(changeFetching(true));
     const filter = store.getState().Filter.filter;
-    console.log(filter);
     const hotDogs = await dal.getHotDogs(filter).then(res=>res.data);
     store.dispatch(setHotDogs(hotDogs));
 }

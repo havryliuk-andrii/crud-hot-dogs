@@ -23,7 +23,30 @@ app.get('/api/getHotDogs', (req,res) =>{
     const filter = req.query.filter;
     console.log(filter);
     if(filter!=="null"&&filter!=="undefined"){
-        allHotDogs = allHotDogs.filter(hotDog=>hotDog.name.includes(filter));
+        allHotDogs = allHotDogs.filter(hotDog=>hotDog.name.toUpperCase().includes(filter.toUpperCase()));
+    }
+    res.json(allHotDogs);
+});
+
+app.get('/api/getFilteredHotDogs', (req,res) =>{
+    const hotDogsData =fs.readFileSync('./data/hotDogs.json');
+    let allHotDogs = JSON.parse(hotDogsData);
+    const filterName = req.query.filterName;
+    const filterIngredients = req.query.filterIngredients.split(" ");
+    if(true){
+        allHotDogs = allHotDogs.filter(hotDog=>hotDog.name.toUpperCase().includes(filterName.toUpperCase()));
+        allHotDogs = filterIngredients.forEach(ing => {
+            allHotDogs.filter(hotDog=>{
+                const ings = hotDog.ingredients.map(ing => ing.name);
+                const flag = false;
+                ings.filter(_ing=>{
+                    if(_ing.toUpperCase() === ing.toUpperCase()){
+                        flag = true;
+                    }
+                })
+                return flag;
+            });
+        });
     }
     res.json(allHotDogs);
 });

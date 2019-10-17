@@ -5,6 +5,7 @@ import '../css/ContentPage.module.css'
 import HotDogsListContainer from './ContainerComponents/HotDogsListContainer';
 import EditDogsListContainer from './ContainerComponents/EditHotDogContainer';
 import CreateHotDogContainer from './ContainerComponents/CreateHotDogContainer';
+import FilterSettings from './FilterSettings';
 
 
 
@@ -14,6 +15,7 @@ const ContentPage = (props) =>{
            <Route exact path='/' render={()=><HotDogsListContainer />} />
            <Route path='/create' render={CreateHotDogContainer} />
            <Route path='/edit/:id' render={EditDogsListContainer} />
+           <Route path='/filter' render={FilterSettings} />
         </main>
     )   
 }
