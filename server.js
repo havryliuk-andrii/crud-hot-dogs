@@ -21,7 +21,6 @@ app.get('/api/getHotDogs', (req,res) =>{
     const hotDogsData =fs.readFileSync('./data/hotDogs.json');
     let allHotDogs = JSON.parse(hotDogsData);
     const filter = req.query.filter;
-    console.log(filter);
     if(filter!=="null"&&filter!=="undefined"){
         allHotDogs = allHotDogs.filter(hotDog=>hotDog.name.toUpperCase().includes(filter.toUpperCase()));
     }

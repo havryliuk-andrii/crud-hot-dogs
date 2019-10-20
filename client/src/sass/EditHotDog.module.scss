@@ -4,7 +4,7 @@
     .ingredient{
         display: grid;
         grid-auto-flow: column;
-        grid-template: 1fr/7fr 4fr 1fr;
+        grid-template: 1fr/7fr 8fr 1fr;
         grid-gap :.5em;
         margin-bottom: 0.5em;
     }

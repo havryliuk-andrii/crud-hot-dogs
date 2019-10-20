@@ -17,7 +17,7 @@ const Ingredient =({id,deleteIngredient,disabled})=>{
             name={`in${id}`}
             component={simpleField}
             type='text'
-            placeholder="input ingredient"
+            placeholder="name"
             validate={[required, maxLength20, string]}
         />
 
