@@ -19,6 +19,24 @@ const setFiltration=(filter)=>{
 
 const resetFiltration=()=>{store.dispatch(resetFilter())};
 
+const optionalFiltration =async(filters)=>{
+    store.dispatch(changeFetching(true));
+    const iNames=Object.keys(filters).filter(key=>key.substring(2,0)==="in");
+    const iMasses=Object.keys(filters).filter(key=>key.substring(2,0)==="im");
+    const counter =iNames.length;
+    let tempIngredients=[];
+    for(let i=0;i<counter;i++){
+        tempIngredients.push({name:filters[iNames[i]],mass:filters[iMasses[i]],id:i});
+    }
+    const _filters={
+        hotDogName:filters.hotDogName,
+        countOfIngs:filters.countOfIngs,  
+        ingredients:tempIngredients
+    };
+    const hotDogs = await dal.filterHotDog(_filters).then(res=>res.data);
+    store.dispatch(setHotDogs(hotDogs));
+}
+
 const addHotDog=async(values)=>{
     const hotDog = vals2JSON(values)
     store.dispatch(changeFetching(true));
@@ -62,4 +80,8 @@ const vals2JSON = (values,id)=>{
     return hotDog;
 }
 
-export {getHotDogs,addHotDog,deleteHotDog,editHotDog,setFiltration,resetFiltration};
+export {
+    getHotDogs, addHotDog, deleteHotDog,
+    editHotDog, setFiltration, resetFiltration,
+    optionalFiltration
+};

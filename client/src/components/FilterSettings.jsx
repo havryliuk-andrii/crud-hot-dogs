@@ -5,6 +5,7 @@ import styled from 'styled-components'
 
 import s from '../css/EditHotDog.module.css'
 import { required, maxLength, number, string, minValue } from '../forms/validation';
+import {optionalFiltration} from '../redux/api'
 const maxLength20 = maxLength(20);
 const minValue1 = minValue(1);
 
@@ -59,7 +60,7 @@ let FilterHotDogForm = (props) => {
     const [ingredientsObjs,setIngredientsObjs] = useState([]);
     const [maxId,setMaxId] = useState(0);
     const formSubmit = (values) => {
-        
+        optionalFiltration(values)
     }
 
     const AddNewIngredient = () => {
@@ -84,7 +85,7 @@ let FilterHotDogForm = (props) => {
                 validate={[maxLength20, string]}
             />
 
-            <Field name='ingredientsCount'
+            <Field name='countOfIngs'
                 component={simpleField}
                 type='text'
                 placeholder="Filter by ingredients count"

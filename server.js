@@ -27,27 +27,54 @@ app.get('/api/getHotDogs', (req,res) =>{
     res.json(allHotDogs);
 });
 
-app.get('/api/getFilteredHotDogs', (req,res) =>{
+app.put('/api/getFilteredHotDogs', (req,res) =>{
     const hotDogsData =fs.readFileSync('./data/hotDogs.json');
+    const filters = req.body;
     let allHotDogs = JSON.parse(hotDogsData);
-    const filterName = req.query.filterName;
-    const filterIngredients = req.query.filterIngredients.split(" ");
-    if(true){
-        allHotDogs = allHotDogs.filter(hotDog=>hotDog.name.toUpperCase().includes(filterName.toUpperCase()));
-        allHotDogs = filterIngredients.forEach(ing => {
-            allHotDogs.filter(hotDog=>{
-                const ings = hotDog.ingredients.map(ing => ing.name);
-                const flag = false;
-                ings.filter(_ing=>{
-                    if(_ing.toUpperCase() === ing.toUpperCase()){
-                        flag = true;
-                    }
-                })
-                return flag;
-            });
-        });
+    let filtered = [];
+    const filterName = filters.hotDogName;
+    const countOfIngs = filters.countOfIngs;
+    const ingredients = filters.ingredients;
+    if(filterName) filtered = allHotDogs.filter(hd=>hd.name.includes(filterName))
+    if(countOfIngs){
+        filtered= filtered?
+            filtered.filter(hd=>hd.ingredients.length===countOfIngs)
+            :allHotDogs.filter(hd=>hd.ingredients.length===countOfIngs)
     }
-    res.json(allHotDogs);
+    if(ingredients.length>0){
+        if(filtered.length>0){
+            filtered = filtered.filter(hd=>{
+                let ings = hd.ingredients;
+                let condition = ingredients.length;
+                ingredients.forEach(filter_ing => {
+                    ings.forEach( ing=> {
+                        if(ing.name===filter_ing.name&&ing.mass>=filter_ing.mass){
+                            condition--;
+                            return;
+                        };
+                    });
+                });
+                if(condition===0)return true;
+            })
+        }
+        else{
+            filtered = allHotDogs.filter(hd=>{
+                let ings = hd.ingredients;
+                let condition = ingredients.length;
+                ingredients.forEach(filter_ing => {
+                    ings.forEach( ing=> {
+                        if(ing.name===filter_ing.name&&ing.mass>=filter_ing.mass){
+                            condition--;
+                            return;
+                        };
+                    });
+                });
+                if(condition===0)return true;
+            })
+        }
+    }
+    console.log(filtered)
+    res.json(filtered);
 });
 
 app.post('/api/addHotDog', (req,res) =>{

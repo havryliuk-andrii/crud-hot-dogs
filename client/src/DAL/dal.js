@@ -11,6 +11,10 @@ const dal ={
         return Axios.post('/api/addHotDog',  hotDog);
     },
 
+    filterHotDog:(filters)=>{
+        return Axios.put('/api/getFilteredHotDogs',  filters);
+    },
+
     deleteHotDog:(id)=>{
         return Axios.delete(`/api/deleteHotDog?id=${id}`,);
     },
