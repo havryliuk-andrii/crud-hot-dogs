@@ -1,15 +1,19 @@
 import store from './store';
 import dal from '../DAL/dal';
-import { setHotDogs,changeFetching } from './redusers/hotDogsListPage';
+import { setHotDogs,changeFetching , setIsNeed} from './redusers/hotDogsListPage';
 import { editSuccess } from './redusers/EditHotDogReducer';
 import { createSuccess } from './redusers/CreateHotDogReducer';
+import { optionalFiltrationSuccess } from './redusers/OptionalFiltration';
 import { setFilter,resetFilter } from './redusers/Filter';
 
 const getHotDogs=async()=>{
     store.dispatch(changeFetching(true));
     const filter = store.getState().Filter.filter;
-    const hotDogs = await dal.getHotDogs(filter).then(res=>res.data);
-    store.dispatch(setHotDogs(hotDogs));
+    if(!store.getState().HotDogsListPage.isNeed){
+        const hotDogs = await dal.getHotDogs(filter).then(res=>res.data);
+        store.dispatch(setHotDogs(hotDogs));
+    }
+    
 }
 
 const setFiltration=(filter)=>{
@@ -21,6 +25,8 @@ const resetFiltration=()=>{store.dispatch(resetFilter())};
 
 const optionalFiltration =async(filters)=>{
     store.dispatch(changeFetching(true));
+    store.dispatch(setIsNeed(true));
+    store.dispatch(optionalFiltrationSuccess(true));
     const iNames=Object.keys(filters).filter(key=>key.substring(2,0)==="in");
     const iMasses=Object.keys(filters).filter(key=>key.substring(2,0)==="im");
     const counter =iNames.length;
@@ -35,6 +41,8 @@ const optionalFiltration =async(filters)=>{
     };
     const hotDogs = await dal.filterHotDog(_filters).then(res=>res.data);
     store.dispatch(setHotDogs(hotDogs));
+    store.dispatch(setIsNeed(false));
+    store.dispatch(optionalFiltrationSuccess(false));
 }
 
 const addHotDog=async(values)=>{

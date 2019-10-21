@@ -59,6 +59,7 @@ const FilteredIngredients =(props)=>{
 let FilterHotDogForm = (props) => {
     const [ingredientsObjs,setIngredientsObjs] = useState([]);
     const [maxId,setMaxId] = useState(0);
+    
     const formSubmit = (values) => {
         optionalFiltration(values)
     }

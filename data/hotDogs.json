@@ -79,10 +79,14 @@
         "name": "bread",
         "mass": "10",
         "id": 0
+      },
+      {
+        "name": "tomato",
+        "mass": "2",
+        "id": 1
       }
     ],
-    "mass": "10",
-    "cost": 20,
-    "id": 0
+    "mass": 12,
+    "cost": 24
   }
 ]

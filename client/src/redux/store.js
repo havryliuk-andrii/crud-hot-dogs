@@ -6,6 +6,7 @@ import SideBar from './redusers/SideBarReduser';
 import EditHotDogReducer from './redusers/EditHotDogReducer';
 import CreateHotDogReducer from './redusers/CreateHotDogReducer';
 import Filter from './redusers/Filter';
+import OptionalFiltrationReduser from "./redusers/OptionalFiltration";
 
 const redusers = combineReducers({
     HotDogsListPage,
@@ -13,6 +14,7 @@ const redusers = combineReducers({
     Filter,
     EditHotDogReducer,
     CreateHotDogReducer,
+    OptionalFiltrationReduser,
     form: formReducer
 })
 
