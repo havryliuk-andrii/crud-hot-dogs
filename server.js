@@ -33,16 +33,16 @@ app.put('/api/getFilteredHotDogs', (req,res) =>{
     let allHotDogs = JSON.parse(hotDogsData);
     let filtered = [];
     const filterName = filters.hotDogName;
-    const countOfIngs = filters.countOfIngs;
+    const countOfIngs = +filters.countOfIngs;
     const ingredients = filters.ingredients;
     if(filterName) filtered = allHotDogs.filter(hd=>hd.name.includes(filterName))
+    else{filtered = allHotDogs;}
+    console.log(filtered)
     if(countOfIngs){
-        filtered= filtered?
-            filtered.filter(hd=>hd.ingredients.length===countOfIngs)
-            :allHotDogs.filter(hd=>hd.ingredients.length===countOfIngs)
+        filtered = filtered.filter(hd=>hd.ingredients.length===countOfIngs)
     }
+    console.log(countOfIngs)
     if(ingredients.length>0){
-        if(filtered.length>0){
             filtered = filtered.filter(hd=>{
                 let ings = hd.ingredients;
                 let condition = ingredients.length;
@@ -56,22 +56,6 @@ app.put('/api/getFilteredHotDogs', (req,res) =>{
                 });
                 if(condition===0)return true;
             })
-        }
-        else{
-            filtered = allHotDogs.filter(hd=>{
-                let ings = hd.ingredients;
-                let condition = ingredients.length;
-                ingredients.forEach(filter_ing => {
-                    ings.forEach( ing=> {
-                        if(ing.name===filter_ing.name&&ing.mass>=filter_ing.mass){
-                            condition--;
-                            return;
-                        };
-                    });
-                });
-                if(condition===0)return true;
-            })
-        }
     }
     console.log(filtered)
     res.json(filtered);

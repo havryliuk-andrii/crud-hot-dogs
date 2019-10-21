@@ -21,7 +21,7 @@
         border-radius: 10px;
         transition: transform .5s;
         @include fly(lighten(#000,35));
-        &:hover{
+        &:hover{ 
             transform: translateX(10px);
         }
     }
