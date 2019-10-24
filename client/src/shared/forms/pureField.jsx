@@ -1,12 +1,9 @@
 import React from 'react'
 import TooltipInput from './TooltipInput';
+import {Field} from 'redux-form'
 
-const pureField = ({
-    input,
-    label,
-    type,
-    placeholder,
-    meta: { touched, error, warning }
+const pureField = ({input, label,type,
+    placeholder, meta: { touched, error, warning }
   }) => (
     <div>
   
@@ -21,4 +18,17 @@ const pureField = ({
     </div>
 )
 
+const createPureField = (name, type, placeholder, validateArr, classNames)=>{
+  return <Field 
+    className ={classNames}
+    name={name}
+    component={pureField}
+    type={type}
+    placeholder={placeholder}
+    validate={validateArr}
+  />
+}
+
+
 export default pureField; 
+export {createPureField} 

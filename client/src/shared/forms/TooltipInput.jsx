@@ -18,7 +18,7 @@ const TooltipInput = styled.div`
             border-bottom:1em solid transparent;
         }
     }
-    span{
+    div span{
         white-space: nowrap;
         font-size:1.1em;
         font-weight: bold;

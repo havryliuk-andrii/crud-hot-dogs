@@ -1,4 +1,5 @@
 import React from 'react'
+import {Field} from 'redux-form'
 import s from '../css/Field.module.css'
 
 const simpleField =(props)=>{
@@ -12,4 +13,15 @@ const simpleField =(props)=>{
     )
 }
 
-export{simpleField};
+const createSimpleField = (name, type, placeholder, validateArr, classNames)=>{
+    return <Field 
+      className ={classNames}
+      name={name}
+      component={simpleField}
+      type={type}
+      placeholder={placeholder}
+      validate={validateArr}
+    />
+}
+
+export{simpleField, createSimpleField};

@@ -37,6 +37,10 @@ const optionalFiltration =async(filters)=>{
     const _filters={
         hotDogName:filters.hotDogName,
         countOfIngs:filters.countOfIngs,  
+        minMass:filters.minMass, 
+        maxMass:filters.maxMass, 
+        minCost:filters.minCost, 
+        maxCost:filters.maxCost, 
         ingredients:tempIngredients
     };
     const hotDogs = await dal.filterHotDog(_filters).then(res=>res.data);
@@ -47,6 +51,8 @@ const optionalFiltration =async(filters)=>{
 
 const addHotDog=async(values)=>{
     const hotDog = vals2JSON(values)
+    console.log(values);
+    console.log(hotDog);
     store.dispatch(changeFetching(true));
     store.dispatch(createSuccess(true));
     await dal.addHotDog(hotDog);
@@ -73,6 +79,7 @@ const vals2JSON = (values,id)=>{
     let hotDog = {};
     hotDog.name = values.hotDogName;
     hotDog.description = values.description;
+    hotDog.image = values.image;
     const iNames=Object.keys(values).filter(key=>key.substring(2,0)==="in");
     const iMasses=Object.keys(values).filter(key=>key.substring(2,0)==="im");
     const counter =iNames.length;

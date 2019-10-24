@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { simpleField } from '../forms/Fields'
+import { simpleField, createSimpleField } from '../forms/Fields'
 import styled from 'styled-components'
 
 import s from '../css/EditHotDog.module.css'
@@ -12,31 +12,18 @@ const minValue1 = minValue(1);
 const createFilteredIngredientUI =(id,deleteIngredient)=>{
     return <div key ={id} className={s.ingredient}>
 
-    <Field className={s.ingredientName}
-         name={`in${id}`}
-         component={simpleField}
-         type='text'
-         placeholder="name"
-         validate={[required, maxLength20, string]}
-     />
-
-     <Field className={s.ingredientMass}
-         name={`im${id}`}
-         component={simpleField}
-         type='number'
-         placeholder="minm ass"
-         validate={[required, number, minValue1]}
-     />
+        {createSimpleField(`in${id}`,'text',"name",[required, maxLength20, string],s.ingredientName)}
+        {createSimpleField(`im${id}`,'number',"min mass",[required, number, minValue1],s.ingredientMass)}
 
      <button onClick={()=>deleteIngredient(id)} className={s.delete} type="button" >Delete</button>
 
  </div>
 }
 const Ingredients = styled.div`
-span{
-    display:block;
-    font-size:.7rem;
-    margin-bottom:.6rem;
+    span{
+        display:block;
+        font-size:.7rem;
+        margin-bottom:.6rem;
 }
 `
 const FilteredIngredients =(props)=>{ 
@@ -55,6 +42,16 @@ const FilteredIngredients =(props)=>{
         
     </Ingredients>
 }
+
+const MinMaxFields = styled.div`
+    display:grid;
+    gap: 1rem;
+`
+const MinMaxField = styled.div`
+    display:grid;
+    grid-template: 1fr / 1fr 1fr;
+    gap: .5rem;
+`
 
 let FilterHotDogForm = (props) => {
     const [ingredientsObjs,setIngredientsObjs] = useState([]);
@@ -78,24 +75,22 @@ let FilterHotDogForm = (props) => {
     return (
         <form id={s.hotDogCreateForm} onSubmit={props.handleSubmit(formSubmit)}>
 
-            <Field name='hotDogName'
-                component={simpleField}
-                type='text'
-                placeholder="Hot Dog Name"
-                errorPos='right'
-                validate={[maxLength20, string]}
-            />
+            {createSimpleField(`hotDogName`,'text',"Hot Dog Name",[maxLength20, string])}
+            {createSimpleField(`countOfIngs`,'text',"Filter by ingredients count",[maxLength20, number])}
 
-            <Field name='countOfIngs'
-                component={simpleField}
-                type='text'
-                placeholder="Filter by ingredients count"
-                validate={[maxLength20, number]}
-            />
+            <MinMaxFields>
+                <MinMaxField>
+                    {createSimpleField(`minCost`,'number',"min cost",[maxLength20, number])}
+                    {createSimpleField(`maxCost`,'number',"max cost",[maxLength20, number])}
+                </MinMaxField>
 
-            <FilteredIngredients 
-                ingredientsObjs={ingredientsObjs} 
-                deleteIngredient={deleteIngredient}/>
+                <MinMaxField>
+                    {createSimpleField(`minMass`,'number',"min mass",[maxLength20, number])}
+                    {createSimpleField(`maxMass`,'number',"max mass",[maxLength20, number])}
+                </MinMaxField>                
+            </MinMaxFields>
+
+            <FilteredIngredients ingredientsObjs={ingredientsObjs} deleteIngredient={deleteIngredient}/>
 
             <button onClick={AddNewIngredient} type="button" id={s.add}>Add</button> 
 

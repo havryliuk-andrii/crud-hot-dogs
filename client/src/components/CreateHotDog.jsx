@@ -1,35 +1,23 @@
 import React, {useState} from 'react'
 import { Field, reduxForm } from 'redux-form'
-import {simpleField} from '../forms/Fields'
 
+import { simpleField, createSimpleField } from '../forms/Fields'
 import s from '../css/CreateHotDog.module.css'
 import { addHotDog } from '../redux/api';
 import { required, maxLength, number, string, minValue } from '../forms/validation';
-
 const maxLength20 = maxLength(20);
 const minValue1= minValue(1);
+
+const UploadFile = ({ input: {value: omitValue, ...inputProps }, meta: omitMeta, ...props }) => (
+    <input type='file' {...inputProps} {...props} />
+  );
 
 let HotDogCreateForm=(props)=>{
 
     const ingredient=(id)=>(
         <div className={s.ingredient} key ={id}>
-
-            <Field className={s.ingredientName} 
-                   name={`in${id}`} 
-                   component ={simpleField} 
-                   type = 'text' 
-                   placeholder="input ingredient"
-                   validate={[required,maxLength20,string]}
-            />
-
-            <Field className={s.ingredientMass} 
-                   name={`im${id}`} 
-                   component ={simpleField} 
-                   type = 'number' 
-                   placeholder="mass"
-                   validate={[required,number,minValue1]}
-            />
-
+            {createSimpleField(`in${id}`,'text',"input ingredient",[required,maxLength20,string],s.ingredientName)}
+            {createSimpleField(`im${id}`,'number',"mass",[required,number,minValue1],s.ingredientMass)}
         </div>
     )
 
@@ -49,21 +37,10 @@ let HotDogCreateForm=(props)=>{
     
     return(
         <form id={s.hotDogCreateForm} onSubmit={props.handleSubmit(formSubmit)}>
+            {createSimpleField(`hotDogName`,'text',"input hot dog's name",[required,maxLength20,string])}
+            {createSimpleField(`description`,'text',"input description",[required,maxLength20,string])}
 
-            <Field name='hotDogName' 
-                   component ={simpleField} 
-                   type = 'text'
-                   placeholder="input hot dog's name"
-                   errorPos='right'
-                   validate={[required,maxLength20,string]}
-            />
-
-            <Field name='description' 
-                   component ={simpleField} 
-                   type = 'text' 
-                   placeholder="input description" 
-                   validate={[required,maxLength20,string]}
-            />
+            <Field component={UploadFile} name='image' accept='.jpg' />
 
             <div className={s.ingredients}>
                 {ingredients}

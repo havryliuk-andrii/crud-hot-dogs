@@ -1,5 +1,77 @@
 [
   {
+    "name": "Karisha",
+    "description": "very tasty and hot",
+    "ingredients": [
+      {
+        "name": "bread",
+        "mass": "100",
+        "id": 0
+      },
+      {
+        "name": "tomato",
+        "mass": "40",
+        "id": 1
+      },
+      {
+        "name": "paper",
+        "mass": "10",
+        "id": 2
+      },
+      {
+        "name": "sousage",
+        "mass": "50",
+        "id": 3
+      }
+    ],
+    "mass": 200,
+    "cost": 400,
+    "id": 27
+  },
+  {
+    "name": "Antog",
+    "description": "the toha hot dog",
+    "ingredients": [
+      {
+        "name": "sousage",
+        "mass": "300",
+        "id": 0
+      }
+    ],
+    "mass": "300",
+    "cost": 600,
+    "id": 26
+  },
+  {
+    "name": "Yulia -Andjelika",
+    "description": "they love huge",
+    "ingredients": [
+      {
+        "name": "bread",
+        "mass": "5",
+        "id": 0
+      },
+      {
+        "name": "sousage",
+        "mass": "200",
+        "id": 1
+      },
+      {
+        "name": "cabbage",
+        "mass": "1",
+        "id": 2
+      },
+      {
+        "name": "tomato",
+        "mass": "10",
+        "id": 3
+      }
+    ],
+    "mass": 216,
+    "cost": 432,
+    "id": 25
+  },
+  {
     "name": "French-Double",
     "description": "doubleFrench tot dog",
     "ingredients": [
@@ -86,7 +158,7 @@
         "id": 1
       }
     ],
-    "id":0,
+    "id": 0,
     "mass": 12,
     "cost": 24
   }

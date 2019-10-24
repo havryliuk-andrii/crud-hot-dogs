@@ -35,13 +35,27 @@ app.put('/api/getFilteredHotDogs', (req,res) =>{
     const filterName = filters.hotDogName;
     const countOfIngs = +filters.countOfIngs;
     const ingredients = filters.ingredients;
+    const minCost = filters.minCost;
+    const maxCost = filters.maxCost;
+    const minMass = filters.minMass;
+    const maxMass = filters.maxMass;
     if(filterName) filtered = allHotDogs.filter(hd=>hd.name.includes(filterName))
     else{filtered = allHotDogs;}
-    console.log(filtered)
     if(countOfIngs){
         filtered = filtered.filter(hd=>hd.ingredients.length===countOfIngs)
     }
-    console.log(countOfIngs)
+    if(minMass){
+        filtered = filtered.filter(hd=>hd.mass>minMass)
+    }
+    if(maxMass){
+        filtered = filtered.filter(hd=>hd.mass<maxMass)
+    }
+    if(minCost){
+        filtered = filtered.filter(hd=>hd.cost>minCost)
+    }
+    if(maxCost){
+        filtered = filtered.filter(hd=>hd.cost<maxCost)
+    }
     if(ingredients.length>0){
             filtered = filtered.filter(hd=>{
                 let ings = hd.ingredients;
@@ -57,19 +71,19 @@ app.put('/api/getFilteredHotDogs', (req,res) =>{
                 if(condition===0)return true;
             })
     }
-    console.log(filtered)
     res.json(filtered);
 });
 
 app.post('/api/addHotDog', (req,res) =>{
     let newHotDog = req.body;
+    console.log(newHotDog)
     const hotDogs =JSON.parse(fs.readFileSync('./data/hotDogs.json'));
     let lastId =JSON.parse(fs.readFileSync('./data/lastId.json'));
     newHotDog.id = lastId.lastId++;
-    fs.writeFile('./data/lastId.json',JSON.stringify(lastId),()=>{});
-    hotDogs.unshift(newHotDog);
-    fs.writeFile('./data/hotDogs.json',JSON.stringify(hotDogs,null,2),()=>{});
-    res.end();
+    // fs.writeFile('./data/lastId.json',JSON.stringify(lastId),()=>{});
+    // hotDogs.unshift(newHotDog);
+    // fs.writeFile('./data/hotDogs.json',JSON.stringify(hotDogs,null,2),()=>{});
+    // res.end();
 
 });
 
