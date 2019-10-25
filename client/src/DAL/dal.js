@@ -8,7 +8,9 @@ const dal ={
     },
 
     addHotDog:(hotDog)=>{
-        return Axios.post('/api/addHotDog',  hotDog);
+        const fd = new FormData();
+        fd.append("hdimg",hotDog);
+        return Axios.post('/api/addHotDog',  fd);
     },
 
     filterHotDog:(filters)=>{

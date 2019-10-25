@@ -1,13 +1,28 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const multer = require('multer')
 const path = require('path');
-
+const crypto = require('crypto');
+var mime = require('mime');
 const app = express();
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(bodyParser.json());
+// const upload = multer({dest:'./data/photos'});
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './data/photos')
+    },
+    filename: function (req, file, cb) {
+        crypto.pseudoRandomBytes(16, function (err, raw) {
+            cb(null, raw.toString('hex') + Date.now() + '.' + mime.extension(file.mimetype));
+        });
+    }
+});
+var upload = multer({ storage: storage });
+var img = upload.single('hdimg');
 //app.use(express.static(path.join(__dirname, 'data')));
 
 // An api endpoints
@@ -74,16 +89,18 @@ app.put('/api/getFilteredHotDogs', (req,res) =>{
     res.json(filtered);
 });
 
-app.post('/api/addHotDog', (req,res) =>{
-    let newHotDog = req.body;
-    console.log(newHotDog)
-    const hotDogs =JSON.parse(fs.readFileSync('./data/hotDogs.json'));
-    let lastId =JSON.parse(fs.readFileSync('./data/lastId.json'));
-    newHotDog.id = lastId.lastId++;
+app.post('/api/addHotDog',img, (req,res) =>{
+    let newHotDog = req.file;
+    console.log( "newHotDog")
+    console.log( newHotDog)
+    console.log( "/newHotDog")
+    // const hotDogs =JSON.parse(fs.readFileSync('./data/hotDogs.json'));
+    // let lastId =JSON.parse(fs.readFileSync('./data/lastId.json'));
+    // newHotDog.id = lastId.lastId++;
     // fs.writeFile('./data/lastId.json',JSON.stringify(lastId),()=>{});
     // hotDogs.unshift(newHotDog);
     // fs.writeFile('./data/hotDogs.json',JSON.stringify(hotDogs,null,2),()=>{});
-    // res.end();
+    res.end();
 
 });
 

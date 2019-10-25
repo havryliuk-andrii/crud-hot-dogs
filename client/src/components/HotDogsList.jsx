@@ -11,7 +11,6 @@ const HotDogsList = (props) =>{
     
     const hotDogsList = hotDogs ? hotDogs.length>0? 
         <div id={s.list}>{hotDogs.map((hotDog)=>{
-            console.log(hotDog)
             return(
                 <div key={hotDog.id} className={s.hotDogWrapper}>
                     <div className={s.hotDogImg}><img src={hotDog.img ||hotDogImg} alt={hotDog.name}/></div>

@@ -50,11 +50,11 @@ const optionalFiltration =async(filters)=>{
 }
 
 const addHotDog=async(values)=>{
-    const hotDog = vals2JSON(values)
-    console.log(values);
-    console.log(hotDog);
+    // const hotDog = vals2JSON(values)
+    const hotDog = values.hdimg[0];
     store.dispatch(changeFetching(true));
     store.dispatch(createSuccess(true));
+    console.log(hotDog)
     await dal.addHotDog(hotDog);
     getHotDogs();
     store.dispatch(createSuccess(false));

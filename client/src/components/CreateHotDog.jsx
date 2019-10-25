@@ -40,7 +40,7 @@ let HotDogCreateForm=(props)=>{
             {createSimpleField(`hotDogName`,'text',"input hot dog's name",[required,maxLength20,string])}
             {createSimpleField(`description`,'text',"input description",[required,maxLength20,string])}
 
-            <Field component={UploadFile} name='image' accept='.jpg' />
+            <Field component={UploadFile} name='hdimg' accept='.jpg' />
 
             <div className={s.ingredients}>
                 {ingredients}
