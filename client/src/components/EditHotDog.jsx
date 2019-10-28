@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useReducer } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { simpleField ,UploadFile} from '../forms/Fields'
 
@@ -58,7 +58,7 @@ let HotDogEditForm = (props) => {
     }
     
     let [maxId,setMaxId] = useState(Math.max(...props.ingredients.map(i=>i.id)));
-    
+    const [disableDelBtn, setDisableDelBtn] = useState(props.ingredients.length<2);
     const [ingredientsList, setIngredientsList] = useState(props.ingredients)
     const [removedIds,setRemovedIds] = useState([]);
     const [disabled,setDisabled] = useState(props.ingredients.length===1);
@@ -77,13 +77,13 @@ let HotDogEditForm = (props) => {
     const AddNewIngredient =()=>{
         let _ings = [...ingredientsList];
         _ings.push({id:maxId+1,mass:0,name:""});
+        setDisableDelBtn(false);
         setIngredientsList(_ings);
         setMaxId(max=>max+1);
         setDisabled(false);
     }
     return (
         <form id={s.hotDogCreateForm} onSubmit={props.handleSubmit(formSubmit)}>
-
             <Field name='hotDogName'
                 component={simpleField}
                 type='text'
@@ -108,7 +108,7 @@ let HotDogEditForm = (props) => {
             <button onClick={AddNewIngredient} type="button" id={s.add}>Add</button>
 
             <div className={s.formControls}>
-                <button className={s.clearBtn} type="button" disabled={props.pristine || props.submitting} onClick={props.reset}>Remove Changes</button>
+                {/* <button className={s.clearBtn} type="button" disabled={props.pristine || props.submitting} onClick={props.reset}>Remove Changes</button> */}
                 <button className={s.createBtn} type="submit" disabled={props.submitting}>Save</button>
             </div>
 

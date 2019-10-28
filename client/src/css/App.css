@@ -32,7 +32,7 @@ button {
   color: #011936;
   display: grid;
   grid-template-rows: 5em auto 4em;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr;
   grid-template-areas: "h h h"  "m m sb"  "f f f"; }
   #app header {
     grid-area: h; }
