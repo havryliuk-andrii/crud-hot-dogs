@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { simpleField } from '../forms/Fields'
+import { simpleField ,UploadFile} from '../forms/Fields'
 
 
 import s from '../css/EditHotDog.module.css'
@@ -47,11 +47,14 @@ const IngredientsList =(props)=>{
 let HotDogEditForm = (props) => {
     const formSubmit = (values) => {
         let _values ={...values};
+        const hdimg = _values.hdimg?_values.hdimg[0]:undefined;
+        delete _values.hdimg;
+        _values.src = props.hotDogSrc;
         removedIds.forEach(remId=>{
             delete _values[`in${remId}`];
             delete _values[`im${remId}`];
         })
-        editHotDog(_values,props.hotDogId);
+        editHotDog(_values,hdimg,props.hotDogId);
     }
     
     let [maxId,setMaxId] = useState(Math.max(...props.ingredients.map(i=>i.id)));
@@ -96,6 +99,7 @@ let HotDogEditForm = (props) => {
                 validate={[required, maxLength20, string]}
             />
 
+            <Field component={UploadFile} name='hdimg' accept='.jpg' /> 
             
             <IngredientsList ingredients = {ingredientsList} 
                 deleteIngredient ={deleteIngredient}
@@ -131,7 +135,7 @@ const EditHotDog = (props) => {
         <div id={s.createHotDog}>
             <h1>Edit a hot dog to your taste!</h1>
             <div className={s.formWrapper}>
-                <HotDogEditForm initialValues={initVals} ingredients={hotDog.ingredients} hotDogId={hotDog.id} />
+                <HotDogEditForm initialValues={initVals} ingredients={hotDog.ingredients} hotDogSrc={hotDog.src} hotDogId={hotDog.id} />
             </div>
         </div>
     )

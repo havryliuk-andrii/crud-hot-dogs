@@ -1,16 +1,12 @@
 import React, {useState} from 'react'
 import { Field, reduxForm } from 'redux-form'
 
-import { simpleField, createSimpleField } from '../forms/Fields'
+import { simpleField, createSimpleField , UploadFile} from '../forms/Fields'
 import s from '../css/CreateHotDog.module.css'
 import { addHotDog } from '../redux/api';
 import { required, maxLength, number, string, minValue } from '../forms/validation';
 const maxLength20 = maxLength(20);
 const minValue1= minValue(1);
-
-const UploadFile = ({ input: {value: omitValue, ...inputProps }, meta: omitMeta, ...props }) => (
-    <input type='file' {...inputProps} {...props} />
-  );
 
 let HotDogCreateForm=(props)=>{
 
@@ -29,8 +25,11 @@ let HotDogCreateForm=(props)=>{
         setIngredients(ingredients=>[...ingredients,ingredient(ingredientId)])
     };
 
-    const formSubmit=(values)=>{
-       addHotDog(values);
+    const formSubmit=(hdInfo)=>{
+       const hdImg = hdInfo.hdimg?hdInfo.hdimg[0]:null;
+       delete hdInfo.hdimg;
+       console.log(hdImg)
+       return addHotDog(hdInfo,hdImg);
     }
 
     

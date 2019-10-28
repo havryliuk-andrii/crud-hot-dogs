@@ -7,9 +7,12 @@ const dal ={
         return Axios.get(`/api/getHotDogs?filter=${filter}`);
     },
 
-    addHotDog:(hotDog)=>{
+    addHotDog:(hdInfo,hdImg)=>{
+        console.log(hdInfo)
+        console.log(hdImg)
         const fd = new FormData();
-        fd.append("hdimg",hotDog);
+        fd.append("hdInfo",JSON.stringify(hdInfo));
+        fd.append("hdimg",hdImg);
         return Axios.post('/api/addHotDog',  fd);
     },
 
@@ -21,8 +24,11 @@ const dal ={
         return Axios.delete(`/api/deleteHotDog?id=${id}`,);
     },
 
-    editHotDog:(editedHotDog,id)=>{
-        return Axios.put(`/api/editHotDog?id=${id}`,editedHotDog);
+    editHotDog:(hdInfo,hdImg,id)=>{
+        const fd = new FormData();
+        fd.append("hdInfo",JSON.stringify(hdInfo));
+        fd.append("hdimg",hdImg);
+        return Axios.put(`/api/editHotDog?id=${id}`,fd);
     }
 
 }

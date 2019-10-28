@@ -49,13 +49,11 @@ const optionalFiltration =async(filters)=>{
     store.dispatch(optionalFiltrationSuccess(false));
 }
 
-const addHotDog=async(values)=>{
-    // const hotDog = vals2JSON(values)
-    const hotDog = values.hdimg[0];
+const addHotDog=async(hdInfo,hdImg)=>{
+    const hotDogInfo = vals2JSON(hdInfo)
     store.dispatch(changeFetching(true));
     store.dispatch(createSuccess(true));
-    console.log(hotDog)
-    await dal.addHotDog(hotDog);
+    await dal.addHotDog(hotDogInfo,hdImg);
     getHotDogs();
     store.dispatch(createSuccess(false));
 }
@@ -66,11 +64,13 @@ const deleteHotDog = async(id)=>{
     getHotDogs();
 }
 
-const editHotDog = async(values,id)=>{
-    let editedHotDog = vals2JSON(values,id)
+const editHotDog = async(hdInfo,hdImg,id)=>{
+    console.log("hdInfo")
+    console.log(hdInfo)
+    let editedHotDog = vals2JSON(hdInfo,id)
     store.dispatch(changeFetching(true));
     store.dispatch(editSuccess(true));
-    await dal.editHotDog(editedHotDog,id);
+    await dal.editHotDog(editedHotDog,hdImg,id);
     getHotDogs();
     store.dispatch(editSuccess(false));
 }
@@ -80,6 +80,7 @@ const vals2JSON = (values,id)=>{
     hotDog.name = values.hotDogName;
     hotDog.description = values.description;
     hotDog.image = values.image;
+    hotDog.src = values.src;
     const iNames=Object.keys(values).filter(key=>key.substring(2,0)==="in");
     const iMasses=Object.keys(values).filter(key=>key.substring(2,0)==="im");
     const counter =iNames.length;

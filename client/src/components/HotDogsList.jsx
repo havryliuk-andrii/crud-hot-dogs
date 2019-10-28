@@ -13,7 +13,7 @@ const HotDogsList = (props) =>{
         <div id={s.list}>{hotDogs.map((hotDog)=>{
             return(
                 <div key={hotDog.id} className={s.hotDogWrapper}>
-                    <div className={s.hotDogImg}><img src={hotDog.img ||hotDogImg} alt={hotDog.name}/></div>
+                    <div className={s.hotDogImg}><img src={hotDog.src || "/photos/hotDogAnon.jpg"} alt={hotDog.name}/></div>
                     <div className={s.hotDogBody}>
                         <div className={s.name}>{hotDog.name}</div>
                         <div className={s.description}>{hotDog.description}</div>

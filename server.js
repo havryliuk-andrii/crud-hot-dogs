@@ -9,6 +9,7 @@ const app = express();
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static('./data'));
 app.use(bodyParser.json());
 // const upload = multer({dest:'./data/photos'});
 var storage = multer.diskStorage({
@@ -17,7 +18,8 @@ var storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         crypto.pseudoRandomBytes(16, function (err, raw) {
-            cb(null, raw.toString('hex') + Date.now() + '.' + mime.extension(file.mimetype));
+            const fileName = "hdImgNew";
+            cb(null, `${fileName}` + '.' + mime.extension(file.mimetype));
         });
     }
 });
@@ -54,7 +56,7 @@ app.put('/api/getFilteredHotDogs', (req,res) =>{
     const maxCost = filters.maxCost;
     const minMass = filters.minMass;
     const maxMass = filters.maxMass;
-    if(filterName) filtered = allHotDogs.filter(hd=>hd.name.includes(filterName))
+    if(filterName) filtered = allHotDogs.filter(hd=>hd.name.toUpperCase().includes(filterName.toUpperCase()))
     else{filtered = allHotDogs;}
     if(countOfIngs){
         filtered = filtered.filter(hd=>hd.ingredients.length===countOfIngs)
@@ -77,7 +79,7 @@ app.put('/api/getFilteredHotDogs', (req,res) =>{
                 let condition = ingredients.length;
                 ingredients.forEach(filter_ing => {
                     ings.forEach( ing=> {
-                        if(ing.name===filter_ing.name&&ing.mass>=filter_ing.mass){
+                        if(ing.name.toUpperCase()===filter_ing.name.toUpperCase()&&ing.mass>=filter_ing.mass){
                             condition--;
                             return;
                         };
@@ -90,16 +92,26 @@ app.put('/api/getFilteredHotDogs', (req,res) =>{
 });
 
 app.post('/api/addHotDog',img, (req,res) =>{
-    let newHotDog = req.file;
-    console.log( "newHotDog")
-    console.log( newHotDog)
-    console.log( "/newHotDog")
-    // const hotDogs =JSON.parse(fs.readFileSync('./data/hotDogs.json'));
-    // let lastId =JSON.parse(fs.readFileSync('./data/lastId.json'));
-    // newHotDog.id = lastId.lastId++;
-    // fs.writeFile('./data/lastId.json',JSON.stringify(lastId),()=>{});
-    // hotDogs.unshift(newHotDog);
-    // fs.writeFile('./data/hotDogs.json',JSON.stringify(hotDogs,null,2),()=>{});
+    console.log("/api/addHotDog");
+    let img = req.file;
+    console.log(img)
+    let hotdog = JSON.parse(req.body.hdInfo);
+    const hotDogs =JSON.parse(fs.readFileSync('./data/hotDogs.json'));
+    let lastId =JSON.parse(fs.readFileSync('./data/lastId.json'));
+    if(img){
+        const extention = img.filename.split('.')[1];
+        const newHash = new Date().getTime();
+        fs.renameSync(`./data/photos/${img.filename}`,`./data/photos/hdImg${lastId.lastId}${newHash}.${extention}`);
+        hotdog.src = `/photos/hdImg${lastId.lastId}${newHash}.${extention}`
+    }
+    else{
+        hotdog.src = `/photos/hotDogAnon.jpg`
+    }
+    
+    hotdog.id = lastId.lastId++;
+    fs.writeFile('./data/lastId.json',JSON.stringify(lastId),()=>{});
+    hotDogs.unshift(hotdog);
+    fs.writeFile('./data/hotDogs.json',JSON.stringify(hotDogs,null,2),()=>{});
     res.end();
 
 });
@@ -112,9 +124,19 @@ app.delete('/api/deleteHotDog', (req,res) =>{
     res.end();
 });
 
-app.put('/api/editHotDog', (req,res) =>{
-    const id = req.query.id;    
-    let editedHotDog = req.body;
+app.put('/api/editHotDog',img, (req,res) =>{
+    let img = req.file;
+    const id = req.query.id;
+    let editedHotDog = JSON.parse(req.body.hdInfo);
+    if(img){
+        const [fpath,extension] = editedHotDog.src.split('.');
+        const newHash = new Date().getTime();
+        fs.renameSync(`./data/photos/${img.filename}`,`./data/photos/hdImg${id}${newHash}.${extension}`);
+        console.log(editedHotDog);
+        if(editedHotDog.src!="/photos/hotDogAnon.jpg") fs.unlinkSync(`./data${editedHotDog.src}`)
+        editedHotDog.src = `/photos/hdImg${id}${newHash}.${extension}`;
+    }
+    console.log(editedHotDog);
     let hotDogs =JSON.parse(fs.readFileSync('./data/hotDogs.json'));
     hotDogs=hotDogs.map((hotDog=>{
         return hotDog.id==id?editedHotDog:hotDog;

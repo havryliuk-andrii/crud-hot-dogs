@@ -24,4 +24,8 @@ const createSimpleField = (name, type, placeholder, validateArr, classNames)=>{
     />
 }
 
-export{simpleField, createSimpleField};
+const UploadFile = ({ input: {value: omitValue, ...inputProps }, meta: omitMeta, ...props }) => (
+    <input type='file' {...inputProps} {...props} />
+);
+
+export{simpleField, createSimpleField,UploadFile};
