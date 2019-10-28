@@ -1,35 +1,5 @@
 [
   {
-    "name": "wertyu",
-    "description": "doubleFrench tot dog",
-    "src": "/photos/hdImg631572289255359.jpg",
-    "ingredients": [
-      {
-        "name": "tomato",
-        "mass": "2",
-        "id": 0
-      },
-      {
-        "name": "ing3",
-        "mass": "2",
-        "id": 1
-      },
-      {
-        "name": "del0",
-        "mass": "3",
-        "id": 2
-      },
-      {
-        "name": "ing4",
-        "mass": "5",
-        "id": 3
-      }
-    ],
-    "mass": 12,
-    "cost": 24,
-    "id": 63
-  },
-  {
     "name": "French-Double-",
     "description": "werty",
     "src": "/photos/hdImg621572289244978.jpg",
